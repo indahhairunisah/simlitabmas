@@ -104,7 +104,6 @@
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
         }
-
         
         .chart-container {
             height: 50vh;
@@ -121,8 +120,7 @@
             text-align: center;
             font-weight: bold;
             color: rgb(0, 0, 0);
-        }
-    
+        }    
     </style>
 </head>
 <body>
@@ -138,7 +136,7 @@
         <!-- Section 1 -->
         <section id="section1">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center" style="justify-content: center;">
                     <div class="col-md-4 col-6">
                         <div class="info-box large-box" style="background-color: #4CAF50; color: white;">
                             <div class="info-time info-time-left" id="time1">Nama Ruangan</div>
@@ -208,7 +206,12 @@
                 <h2 style="text-align: center;">HISTORI DATA</h2>
                 <div class="row">
                     <div class="col-md-3 col-sm-6 mb-4 chart-container">
-                        <div class="chart ">
+                        <div class="chart">
+                            <canvas id="suhuOptimal"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4 chart-container">
+                        <div class="chart">
                             <canvas id="lineChart1"></canvas>
                         </div>
                     </div>
@@ -222,65 +225,32 @@
                             <canvas id="lineChart3"></canvas>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-3 col-sm-6 mb-4 chart-container">
                         <div class="chart">
                             <canvas id="lineChart4"></canvas>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-8 col-12 d-flex flex-wrap gap-1">
-                    <div class="col-md-3 col-sm-6 mb-4">
-                        <div class="info-box">
-                            <div class="info-time" id="time2">Tanggal / Jam</div>
-                            <div class="info-title">Sensor 1</div>
-                            <div class="info-value" id="suhu">C</div>
+                    <div class="col-md-3 col-sm-6 mb-4 chart-container">
+                        <div class="chart">
+                            <canvas id="lineChart5"></canvas>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6 mb-4">
-                        <div class="info-box">
-                            <div class="info-time" id="time3">Tanggal / Jam</div>
-                            <div class="info-title">Sensor 2</div>
-                            <div class="info-value" id="suhu">C</div>
+                    <div class="col-md-3 col-sm-6 mb-4 chart-container">
+                        <div class="chart">
+                            <canvas id="lineChart6"></canvas>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6 mb-4">
-                        <div class="info-box">
-                            <div class="info-time" id="time4">Tanggal / Jam</div>
-                            <div class="info-title">Sensor 3</div>
-                            <div class="info-value" id="suhu">C</div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 mb-4">
-                        <div class="info-box">
-                            <div class="info-time" id="time5">Tanggal / Jam</div>
-                            <div class="info-title">Sensor 4</div>
-                            <div class="info-value" id="suhu">C</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 mb-4">
-                        <div class="info-box">
-                            <div class="info-time" id="time6">Tanggal / Jam</div>
-                            <div class="info-title">Sensor 5</div>
-                            <div class="info-value" id="suhu">C</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 mb-4">
-                        <div class="info-box">
-                            <div class="info-time" id="time7">Tanggal / Jam</div>
-                            <div class="info-title">Sensor 6</div>
-                            <div class="info-value" id="suhu">C</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 mb-4">
-                        <div class="info-box">
-                            <div class="info-time" id="time8">Tanggal / Jam</div>
-                            <div class="info-title">Sensor 7</div>
-                            <div class="info-value" id="suhu">C</div>
+                    <div class="col-md-3 col-sm-6 mb-4 chart-container">
+                        <div class="chart">
+                            <canvas id="lineChart7"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        
 
     </main>
 
