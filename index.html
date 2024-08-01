@@ -182,6 +182,30 @@
         .text-centerr {
         text-align: center;
       }
+      .footer {
+          background-color: #000000;
+          padding: 20px 0;
+          text-align: center;
+          /* border-top: 1px solid #e7e7e7; */
+          margin-top: 50px;
+      }
+      .footer .container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+      .footer p {
+          margin: 0;
+          color: #f4f4f4;
+          text-align: center;
+      }
+      .footer a {
+          color: #007bff;
+          text-decoration: none;
+      }
+      .footer a:hover {
+          text-decoration: underline;
+      }
     </style>
 
   </head>
@@ -266,23 +290,35 @@
         <div class="container">
           <h2 class="text-centerr" style="color: #ffffff; margin-top: 50px; margin-bottom: 50px;">HISTORI DATA</h2>
           <!-- section 2, row 1 -->
-          <div class="text-center mb-4" style="justify-content: right;">
-            <button id="printBtn" class="btn btn-danger">Print</button>
-            <button id="exportExcelBtn" class="btn btn-primary">Export to Excel</button>
-          </div>
-          <div class="row">
-            <div class="col-md-6 col-sm-6 mb-4">
-              <div class="chart-containerr">
-                <canvas id="suhuOptimal"></canvas>
-              </div>
+
+           <!-- Filter Period -->
+            <div class="row">
+                <div class="filter-period text-center col-md-6 col-sm-4 mb-4">
+                    <label for="startDate"> <b>Start Date:</b></label>
+                    <input type="date" id="startDate">
+                    <label for="endDate"> <b>End Date:</b></label>
+                    <input type="date" id="endDate">
+                    <button id="filterBtn" class="btn btn-danger"> <b>Filter</b></button>
+                </div>
+                <div class="text-center col-md-6 col-sm-4 mb-4" style="justify-content: right;">
+                    <button id="printBtn" class="btn btn-warning">Print</button>
+                    <button id="exportExcelBtn" class="btn btn-primary">Export to Excel</button>
+                </div>
+
             </div>
-            <div class="col-md-6 col-sm-6 mb-4">
-              <div class="chart-containerr">
-                <canvas id="lineChart1"></canvas>
-              </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 mb-4">
+                    <div class="chart-containerr">
+                        <canvas id="suhuOptimal"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 mb-4">
+                    <div class="chart-containerr">
+                        <canvas id="lineChart1"></canvas>
+                    </div>
+                </div>
             </div>
-            
-          </div>
 
           <!-- section 2, row 2 -->
           <div class="row">
@@ -296,35 +332,33 @@
                   <canvas id="lineChart3"></canvas>
                 </div>
               </div>
-          </div>
+            </div>
 
-          <div class="row">
-            <div class="col-md-6 col-sm-4 mb-4">
-                <div class="chart-containerr">
-                  <canvas id="lineChart4"></canvas>
+            <div class="row">
+                <div class="col-md-6 col-sm-4 mb-4">
+                    <div class="chart-containerr">
+                        <canvas id="lineChart4"></canvas>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-6 col-sm-4 mb-4">
-                <div class="chart-containerr">
-                  <canvas id="lineChart5"></canvas>
+                <div class="col-md-6 col-sm-4 mb-4">
+                    <div class="chart-containerr">
+                    <canvas id="lineChart5"></canvas>
+                    </div>
                 </div>
-              </div>
-          </div>
+            </div>
 
-          <div class="row">
-            <div class="col-md-6 col-sm-4 mb-4">
-                <div class="chart-containerr">
-                  <canvas id="lineChart6"></canvas>
+            <div class="row">
+                <div class="col-md-6 col-sm-4 mb-4">
+                    <div class="chart-containerr">
+                    <canvas id="lineChart6"></canvas>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-6 col-sm-4 mb-4">
-                <div class="chart-containerr">
-                  <canvas id="lineChart7"></canvas>
+                <div class="col-md-6 col-sm-4 mb-4">
+                    <div class="chart-containerr">
+                    <canvas id="lineChart7"></canvas>
+                    </div>
                 </div>
-              </div>
-          </div>
-
-
+            </div>
         </div>
       </section>
 
@@ -365,6 +399,13 @@
       // Update the page when it loads
       window.onload = updatePage;
     </script>
+
+    <footer class="footer" style="background-color: black;">
+      <div class="container">
+          <p style="text-align: center; text-color: white">&copy; 2024 SIMLITABMAS. All rights reserved.</p>
+      </div>
+    </footer>
+
     <script src="scripts.js"></script>
   </body>
   
