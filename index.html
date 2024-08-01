@@ -206,6 +206,13 @@
       .footer a:hover {
           text-decoration: underline;
       }
+      #thingspeak-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
     </style>
 
   </head>
@@ -224,66 +231,67 @@
 
       <!-- Section 1 -->
       <div class="container">
-        <div class="row">
-
-          <div class="col-md-10 col-12">
-                <div class="info-box large-box" style="background-color: #4CAF50; color: white;">
-                    <div class="info-time info-time-left" id="time1">Nama Ruangan</div>
-                    <div class="info-title">Suhu Optimal</div>
-                    <div class="info-value" id="suhu">C</div>
-                </div>
-          </div>
-          <div class="col-md-2 col-12 mb-4">
-            <div class="info-box">
-              <div class="info-time" id="time2">Tanggal / Jam</div>
-              <div class="info-title">Sensor 1</div>
-              <div class="info-value" id="suhu">C</div>
-            </div>
-          </div>
-          <div class="col-md-2 col-12 mb-4">
-            <div class="info-box">
-              <div class="info-time" id="time3">Tanggal / Jam</div>
-              <div class="info-title">Sensor 2</div>
-              <div class="info-value" id="suhu">C</div>
-            </div>
-          </div>
-          <div class="col-md-2 col-12 mb-4">
-            <div class="info-box">
-              <div class="info-time" id="time4">Tanggal / Jam</div>
-              <div class="info-title">Sensor 3</div>
-              <div class="info-value" id="suhu">C</div>
-            </div>
-          </div>
-          <div class="col-md-2 col-12 mb-4">
-            <div class="info-box">
-              <div class="info-time" id="time5">Tanggal / Jam</div>
-              <div class="info-title">Sensor 4</div>
-              <div class="info-value" id="suhu">C</div>
-            </div>
-          </div>
-          <div class="col-md-2 col-12 mb-4">
-            <div class="info-box">
-              <div class="info-time" id="time6">Tanggal / Jam</div>
-              <div class="info-title">Sensor 5</div>
-              <div class="info-value" id="suhu">C</div>
-            </div>
-          </div>
-          <div class="col-md-2 col-12 mb-4">
-            <div class="info-box">
-              <div class="info-time" id="time7">Tanggal / Jam</div>
-              <div class="info-title">Sensor 6</div>
-              <div class="info-value" id="suhu">C</div>
-            </div>
-          </div>
-          <div class="col-md-2 col-12 mb-4">
-            <div class="info-box">
-              <div class="info-time" id="time8">Tanggal / Jam</div>
-              <div class="info-title">Sensor 7</div>
-              <div class="info-value" id="suhu">C</div>
-            </div>
-          </div>
-        </div>
+  <div class="row">
+    <div class="col-md-10 col-12">
+      <div class="info-box large-box" style="background-color: #4CAF50; color: white;">
+        <div class="info-time info-time-left" id="time1">Tanggal / Jam</div>
+        <div class="info-title">Suhu Optimal</div>
+        <div class="info-value" id="suhu1">C</div>
       </div>
+    </div>
+    <div class="col-md-2 col-12 mb-4">
+      <div class="info-box">
+        <div class="info-time" id="time2">Tanggal / Jam</div>
+        <div class="info-title">Sensor 1</div>
+        <div class="info-value" id="suhu1">C</div>
+      </div>
+    </div>
+    <div class="col-md-2 col-12 mb-4">
+      <div class="info-box">
+        <div class="info-time" id="time3">Tanggal / Jam</div>
+        <div class="info-title">Sensor 2</div>
+        <div class="info-value" id="suhu2">C</div>
+      </div>
+    </div>
+    <div class="col-md-2 col-12 mb-4">
+      <div class="info-box">
+        <div class="info-time" id="time4">Tanggal / Jam</div>
+        <div class="info-title">Sensor 3</div>
+        <div class="info-value" id="suhu3">C</div>
+      </div>
+    </div>
+    <div class="col-md-2 col-12 mb-4">
+      <div class="info-box">
+        <div class="info-time" id="time5">Tanggal / Jam</div>
+        <div class="info-title">Sensor 4</div>
+        <div class="info-value" id="suhu4">C</div>
+      </div>
+    </div>
+    <div class="col-md-2 col-12 mb-4">
+      <div class="info-box">
+        <div class="info-time" id="time6">Tanggal / Jam</div>
+        <div class="info-title">Sensor 5</div>
+        <div class="info-value" id="suhu5">C</div>
+      </div>
+    </div>
+    <div class="col-md-2 col-12 mb-4">
+      <div class="info-box">
+        <div class="info-time" id="time7">Tanggal / Jam</div>
+        <div class="info-title">Sensor 6</div>
+        <div class="info-value" id="suhu6">C</div>
+      </div>
+    </div>
+    <div class="col-md-2 col-12 mb-4">
+      <div class="info-box">
+        <div class="info-time" id="time8">Tanggal / Jam</div>
+        <div class="info-title">Sensor 7</div>
+        <div class="info-value" id="suhu7">C</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
       
       <!-- Section 2 -->
       <section id="section2" style="background-color: #4CAF50;">
@@ -381,7 +389,7 @@
       async function updatePage() {
         const data = await fetchData();
         if (data) {
-          const contentDiv = document.getElementById('thingspeak-content');
+          // const contentDiv = document.getElementById('thingspeak-content');
           contentDiv.innerHTML = `
                     <p><strong>Suhu Optimal:</strong> ${data.field1} &deg;C</p>
                     <p><strong>Sensor 1</strong> ${data.field2} %</p>
@@ -393,7 +401,9 @@
                     <p><strong>Sensor 7</strong> ${data.field7} &deg;C</p>
                     <p><strong>Tanggal:</strong> ${new Date(data.created_at).toLocaleString()}</p>
                 `;
-        }
+              } else {
+                contentDiv.innerHTML = '<p>Error fetching data. Please try again later.</p>';
+              }
       }
 
       // Update the page when it loads
@@ -405,8 +415,10 @@
         <p style="text-align: center; color: white;">&copy; 2024 SIMLITABMAS. All rights reserved.</p>
       </div>
     </footer>
-
     <script src="scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
   </body>
   
 </html>
