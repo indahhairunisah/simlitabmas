@@ -1,73 +1,15 @@
-async function fetchData() {
-  const url = 'https://api.thingspeak.com/channels/2588909/feeds.json?results=1'; // Mendapatkan 1 hasil terbaru
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data.feeds[0]; // Mengambil data feed terbaru
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return null;
-  }
-}
-
-async function updateInfoBoxes() {
-  const data = await fetchData();
-  if (data) {
-    // Update the values in the HTML elements
-    document.getElementById('time1').textContent = new Date(data.created_at).toLocaleString(); // Update waktu
-    document.getElementById('suhu1').textContent = `${data.field1 || 'N/A'} °C`; // Sensor 1
-    document.getElementById('suhu2').textContent = `${data.field2 || 'N/A'} °C`; // Sensor 2
-    document.getElementById('suhu3').textContent = `${data.field3 || 'N/A'} °C`; // Sensor 3
-    document.getElementById('suhu4').textContent = `${data.field4 || 'N/A'} °C`; // Sensor 4
-    document.getElementById('suhu5').textContent = `${data.field5 || 'N/A'} °C`; // Sensor 5
-    document.getElementById('suhu6').textContent = `${data.field6 || 'N/A'} °C`; // Sensor 6
-    document.getElementById('suhu7').textContent = `${data.field7 || 'N/A'} °C`; // Sensor 7
-  }
-}
-
-// Update info boxes when the page loads
-window.onload = updateInfoBoxes;
-
-
-// Update info boxes when the page loads
-window.onload = () => {
-  updateInfoBoxes();
-  updateCharts(); // Ensure charts are updated as well
-};
-
-
-// Chart.js configurations
-const suhuOptimalCtx = document.getElementById('suhuOptimal').getContext('2d');
-const lineChart1Ctx = document.getElementById('lineChart1').getContext('2d');
-const lineChart2Ctx = document.getElementById('lineChart2').getContext('2d');
-const lineChart3Ctx = document.getElementById('lineChart3').getContext('2d');
-const lineChart4Ctx = document.getElementById('lineChart4').getContext('2d');
-const lineChart5Ctx = document.getElementById('lineChart5').getContext('2d');
-const lineChart6Ctx = document.getElementById('lineChart6').getContext('2d');
-const lineChart7Ctx = document.getElementById('lineChart7').getContext('2d');
-
-let suhuOptimalChart = new Chart(suhuOptimalCtx, { type: 'line', data: {}, options: {} });
-let lineChart1 = new Chart(lineChart1Ctx, { type: 'line', data: {}, options: {} });
-let lineChart2 = new Chart(lineChart2Ctx, { type: 'line', data: {}, options: {} });
-let lineChart3 = new Chart(lineChart3Ctx, { type: 'line', data: {}, options: {} });
-let lineChart4 = new Chart(lineChart4Ctx, { type: 'line', data: {}, options: {} });
-let lineChart5 = new Chart(lineChart5Ctx, { type: 'line', data: {}, options: {} });
-let lineChart6 = new Chart(lineChart6Ctx, { type: 'line', data: {}, options: {} });
-let lineChart7 = new Chart(lineChart7Ctx, { type: 'line', data: {}, options: {} });
-
-// Function to fetch data from ThingSpeak
 async function fetchData(startDate, endDate) {
   const baseUrl = 'https://api.thingspeak.com/channels/2588909/feeds.json?results=2';
   const results = 1000;
   let url = `${baseUrl}?results=${results}`;
-  
+
   if (startDate && endDate) {
     // Format date as ISO string
     const startISO = new Date(startDate).toISOString();
     const endISO = new Date(endDate).toISOString();
     url += `&start=${startISO}&end=${endISO}`;
   }
-  
+
   try {
     const response = await fetch(url);
     const data = await response.json();
@@ -78,20 +20,33 @@ async function fetchData(startDate, endDate) {
   }
 }
 
+async function updateInfoBoxes() {
+  const data = await fetchData(); // Ambil data terbaru
+  if (data && data.length > 0) {
+    const latestFeed = data[0];
+    document.getElementById('time1').textContent = new Date(latestFeed.created_at).toLocaleString(); // Update waktu
+    document.getElementById('suhu1').textContent = `${(parseFloat(latestFeed.field1) || 0).toFixed(2)} °C`; // Sensor 1
+    document.getElementById('suhu2').textContent = `${(parseFloat(latestFeed.field2) || 0).toFixed(2)} °C`; // Sensor 2
+    document.getElementById('suhu3').textContent = `${(parseFloat(latestFeed.field3) || 0).toFixed(2)} °C`; // Sensor 3
+    document.getElementById('suhu4').textContent = `${(parseFloat(latestFeed.field4) || 0).toFixed(2)} °C`; // Sensor 4
+    document.getElementById('suhu5').textContent = `${(parseFloat(latestFeed.field5) || 0).toFixed(2)} °C`; // Sensor 5
+    document.getElementById('suhu6').textContent = `${(parseFloat(latestFeed.field6) || 0).toFixed(2)} °C`; // Sensor 6
+    document.getElementById('suhu7').textContent = `${(parseFloat(latestFeed.field7) || 0).toFixed(2)} °C`; // Sensor 7
+  }
+}
 
-// Function to update the charts with fetched data
 async function updateCharts(startDate, endDate) {
   const data = await fetchData(startDate, endDate);
   if (data) {
-    const suhuData = data.map(feed => parseFloat(feed.field1));
-    const sensor1Data = data.map(feed => parseFloat(feed.field2));
-    const sensor2Data = data.map(feed => parseFloat(feed.field3));
-    const sensor3Data = data.map(feed => parseFloat(feed.field4));
-    const sensor4Data = data.map(feed => parseFloat(feed.field5));
-    const sensor5Data = data.map(feed => parseFloat(feed.field6));
-    const sensor6Data = data.map(feed => parseFloat(feed.field7));
-    const sensor7Data = data.map(feed => parseFloat(feed.field8));
-    const labels = data.map(feed => new Date(feed.created_at).toLocaleString());
+    const suhuData = data.map((feed) => parseFloat(feed.field1).toFixed(2));
+    const sensor1Data = data.map((feed) => parseFloat(feed.field2).toFixed(2));
+    const sensor2Data = data.map((feed) => parseFloat(feed.field3).toFixed(2));
+    const sensor3Data = data.map((feed) => parseFloat(feed.field4).toFixed(2));
+    const sensor4Data = data.map((feed) => parseFloat(feed.field5).toFixed(2));
+    const sensor5Data = data.map((feed) => parseFloat(feed.field6).toFixed(2));
+    const sensor6Data = data.map((feed) => parseFloat(feed.field7).toFixed(2));
+    const sensor7Data = data.map((feed) => parseFloat(feed.field8).toFixed(2));
+    const labels = data.map((feed) => new Date(feed.created_at).toLocaleString());
 
     // Update chart data
     suhuOptimalChart.data = { labels, datasets: [{ label: 'Suhu Optimal', data: suhuData, borderColor: 'rgba(75, 192, 192, 1)', borderWidth: 1 }] };
@@ -115,15 +70,18 @@ async function updateCharts(startDate, endDate) {
   }
 }
 
+// Update info boxes and charts when the page loads
+window.onload = () => {
+  updateInfoBoxes();
+  updateCharts(); // Ensure charts are updated as well
+};
+
+// Event listener for filter button
 document.getElementById('filterBtn').addEventListener('click', () => {
   const startDate = document.getElementById('startDate').value;
   const endDate = document.getElementById('endDate').value;
   updateCharts(startDate, endDate);
 });
-
-// Update the charts when the page loads
-window.onload = updateCharts;
-
 
 // Print functionality
 document.getElementById('printBtn').addEventListener('click', () => {
@@ -132,24 +90,23 @@ document.getElementById('printBtn').addEventListener('click', () => {
 
 // Export to Excel functionality
 document.getElementById('exportExcelBtn').addEventListener('click', async () => {
-  const data = await fetchData();  // Optionally pass startDate and endDate here if needed
+  const data = await fetchData(); // Optionally pass startDate and endDate here if needed
   if (data) {
-    const ws = XLSX.utils.json_to_sheet(data.map(feed => ({
-      Suhu_Optimal: feed.field1,
-      Sensor_1: feed.field2,
-      Sensor_2: feed.field3,
-      Sensor_3: feed.field4,
-      Sensor_4: feed.field5,
-      Sensor_5: feed.field6,
-      Sensor_6: feed.field7,
-      Sensor_7: feed.field8,
-      Created_At: feed.created_at
-    })));
+    const ws = XLSX.utils.json_to_sheet(
+      data.map((feed) => ({
+        Suhu_Optimal: (parseFloat(feed.field1) || 0).toFixed(2),
+        Sensor_1: (parseFloat(feed.field2) || 0).toFixed(2),
+        Sensor_2: (parseFloat(feed.field3) || 0).toFixed(2),
+        Sensor_3: (parseFloat(feed.field4) || 0).toFixed(2),
+        Sensor_4: (parseFloat(feed.field5) || 0).toFixed(2),
+        Sensor_5: (parseFloat(feed.field6) || 0).toFixed(2),
+        Sensor_6: (parseFloat(feed.field7) || 0).toFixed(2),
+        Sensor_7: (parseFloat(feed.field8) || 0).toFixed(2),
+        Created_At: feed.created_at,
+      }))
+    );
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Data');
     XLSX.writeFile(wb, 'data.xlsx');
   }
 });
-
-
-
